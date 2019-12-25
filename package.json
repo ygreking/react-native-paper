@@ -2,10 +2,8 @@
   "name": "react-native-paper",
   "version": "3.4.0",
   "description": "Material design for React Native",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
-  "react-native": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "main": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "lib",
     "babel.js"
@@ -31,7 +29,7 @@
     "bootstrap"
   ],
   "scripts": {
-    "typescript": "tsc --noEmit",
+    "typescript": "tsc --noEmit && tsc --project example --noEmit",
     "lint": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",
