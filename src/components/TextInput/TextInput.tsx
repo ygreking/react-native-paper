@@ -60,6 +60,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   outlineColor?: string;
   /**
+   * Text color of the disabled input.
+   */
+  disabledTextColor?: string;
+  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode

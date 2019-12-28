@@ -54,6 +54,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
       outlineColor,
+      disabledTextColor,
       dense,
       style,
       theme,
@@ -89,10 +90,12 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       containerStyle;
 
     if (disabled) {
-      inputTextColor = activeColor = color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
+      inputTextColor = activeColor =
+        disabledTextColor ||
+        color(colors.text)
+          .alpha(0.54)
+          .rgb()
+          .string();
       placeholderColor = defaultOutlineColor = colors.disabled;
     } else {
       inputTextColor = colors.text;
