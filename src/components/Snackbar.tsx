@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
   ViewStyle,
+  View,
 } from 'react-native';
 
 import Button from './Button';
@@ -13,7 +14,7 @@ import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = {
+type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -41,6 +42,7 @@ type Props = {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */
@@ -74,18 +76,23 @@ const DURATION_LONG = 10000;
  *     visible: false,
  *   };
  *
+ *   _onToggleSnackBar = () => this.setState(state => ({ visible: !state.visible }));
+ *
+ *   _onDismissSnackBar = () => this.setState({ visible: false });
+ *
  *   render() {
  *     const { visible } = this.state;
+ *
  *     return (
  *       <View style={styles.container}>
  *         <Button
- *           onPress={() => this.setState(state => ({ visible: !state.visible }))}
+ *           onPress={this._onToggleSnackBar}
  *         >
- *           {this.state.visible ? 'Hide' : 'Show'}
+ *           {visible ? 'Hide' : 'Show'}
  *         </Button>
  *         <Snackbar
- *           visible={this.state.visible}
- *           onDismiss={() => this.setState({ visible: false })}
+ *           visible={visible}
+ *           onDismiss={this._onDismissSnackBar}
  *           action={{
  *             label: 'Undo',
  *             onPress: () => {
@@ -166,9 +173,10 @@ class Snackbar extends React.Component<Props, State> {
     this.setState({
       hidden: false,
     });
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 200,
+      duration: 200 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
@@ -188,10 +196,10 @@ class Snackbar extends React.Component<Props, State> {
     if (this.hideTimeout) {
       clearTimeout(this.hideTimeout);
     }
-
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 100,
+      duration: 100 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
@@ -203,7 +211,17 @@ class Snackbar extends React.Component<Props, State> {
   private hideTimeout?: number;
 
   render() {
-    const { children, visible, action, onDismiss, theme, style } = this.props;
+    const {
+      children,
+      visible,
+      action,
+      onDismiss,
+      theme,
+      style,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      duration,
+      ...rest
+    } = this.props;
     const { colors, roundness } = theme;
 
     if (this.state.hidden) {
@@ -236,6 +254,7 @@ class Snackbar extends React.Component<Props, State> {
               style,
             ] as StyleProp<ViewStyle>
           }
+          {...rest}
         >
           <Text
             style={[

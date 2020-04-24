@@ -86,8 +86,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       activeColor,
       defaultOutlineColor,
       placeholderColor,
-      errorColor,
-      containerStyle;
+      errorColor;
 
     if (disabled) {
       inputTextColor = activeColor =
@@ -189,11 +188,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
 
     return (
-      <View style={[containerStyle, viewStyle]}>
-        {/* 
+      <View style={viewStyle}>
+        {/*
           Render the outline separately from the container
           This is so that the label can overlap the outline
-          Otherwise the border will cut off the label on Android 
+          Otherwise the border will cut off the label on Android
           */}
         <View>
           <Outline
