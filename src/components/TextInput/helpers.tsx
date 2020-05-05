@@ -23,11 +23,15 @@ export type Padding = { paddingTop: number; paddingBottom: number };
 export const calculateLabelTopPosition = (
   labelHeight: number,
   height: number = 0,
-  optionalPadding: number = 0
+  optionalPadding: number = 0,
+  multiline: boolean = false
 ): number => {
   const customHeight = height > 0 ? height : 0;
-
-  return Math.floor((customHeight - labelHeight) / 2 + optionalPadding);
+  if(!multiline){
+    return Math.floor((customHeight - labelHeight) / 2 + optionalPadding);
+  } else {
+    return 20 + optionalPadding;
+  }
 };
 
 export const calculateInputHeight = (
@@ -100,7 +104,7 @@ export const adjustPaddingOut = ({
   const refFontSize = scale * fontSize;
   let result = pad;
 
-  if (height) {
+  if (height && !multiline) {
     return {
       paddingTop: Math.max(0, (height - fontSize) / 2),
       paddingBottom: Math.max(0, (height - fontSize) / 2),
