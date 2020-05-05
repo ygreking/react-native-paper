@@ -201,8 +201,8 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   dot: {
-    height: 10,
-    width: 10,
+    height: 9.5,
+    width: 9.5,
     borderRadius: 5,
   },
 });
