@@ -113,7 +113,7 @@ class RadioButtonItem extends React.Component<Props> {
                 >
                   {label}
                 </Text>
-                <RadioButton value={value} status={status}></RadioButton>
+                <RadioButton value={value} status={status} theme={this.props.theme}></RadioButton>
               </View>
             </TouchableRipple>
           );
