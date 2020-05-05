@@ -100,9 +100,7 @@ export const adjustPaddingOut = ({
   const refFontSize = scale * fontSize;
   let result = pad;
 
-  console.log('PADDING CALC', result, height, multiline);
-  
-  if (height && !multiline) {
+  if (height) {
     return {
       paddingTop: Math.max(0, (height - fontSize) / 2),
       paddingBottom: Math.max(0, (height - fontSize) / 2),
