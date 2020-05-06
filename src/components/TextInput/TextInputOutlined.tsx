@@ -130,7 +130,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       labelHeight,
       inputHeight,
       LABEL_PADDING_TOP,
-      multiline
+      multiline,
+      dense
     );
 
     if (height && typeof height !== 'number')

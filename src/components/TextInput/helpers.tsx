@@ -24,13 +24,15 @@ export const calculateLabelTopPosition = (
   labelHeight: number,
   height: number = 0,
   optionalPadding: number = 0,
-  multiline: boolean = false
+  multiline: boolean = false,
+  dense: boolean = false
 ): number => {
   const customHeight = height > 0 ? height : 0;
   if(!multiline){
     return Math.floor((customHeight - labelHeight) / 2 + optionalPadding);
   } else {
-    return 20 + optionalPadding;
+    const pad = dense ? 10 : 20;
+    return pad + optionalPadding;
   }
 };
 
